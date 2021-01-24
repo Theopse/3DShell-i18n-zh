@@ -64,8 +64,8 @@ void Dialog_DisplayPrompt(const char *title, const char *msg_1, const char *msg_
         
     Dialog_DisplayBoxAndMsg(title, msg_1, msg_2, text_width1, text_width2, with_bg);
     
-    Draw_GetTextSize(0.42f, &confirm_width, &confirm_height, "YES");
-    Draw_GetTextSize(0.42f, &cancel_width, &cancel_height, "NO");
+    Draw_GetTextSize(0.42f, &confirm_width, &confirm_height, "是");
+    Draw_GetTextSize(0.42f, &cancel_width, &cancel_height, "否");
     
     if (*selection == 0)
         Draw_Rect((288 - cancel_width) - 5, (159 - cancel_height) - 5, cancel_width + 10, cancel_height + 10, 
@@ -74,8 +74,8 @@ void Dialog_DisplayPrompt(const char *title, const char *msg_1, const char *msg_
         Draw_Rect((248 - (confirm_width)) - 5, (159 - confirm_height) - 5, confirm_width + 10, confirm_height + 10, 
             config.dark_theme? SELECTOR_COLOUR_DARK : SELECTOR_COLOUR_LIGHT);
             
-    Draw_Text(248 - (confirm_width), (159 - confirm_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "YES");
-    Draw_Text(288 - cancel_width, (159 - cancel_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "NO");
+    Draw_Text(248 - (confirm_width), (159 - confirm_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "是");
+    Draw_Text(288 - cancel_width, (159 - cancel_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "否");
     
     if (with_bg)
         Draw_EndFrame();

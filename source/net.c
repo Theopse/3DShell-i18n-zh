@@ -65,7 +65,7 @@ static Result Net_SetupContext(CURL *hnd, const char  *url) {
 // From MultiUpdater
 Result Net_DownloadFile(const char *url, const char *path) {
 	Result ret = 0;
-	printf("Downloading from:\n%s\nto:\n%s\n", url, path);
+	printf("正在从：\n%s\n下载文件到：\n%s\n", url, path);
 
 	void *socubuf = memalign(0x1000, 0x100000);
 	if (!socubuf)
@@ -96,7 +96,7 @@ Result Net_DownloadFile(const char *url, const char *path) {
 	ret = FS_OpenFile(&handle, archive, path, (FS_OPEN_WRITE | FS_OPEN_CREATE), 0);
 
 	if (R_FAILED(ret)) {
-		printf("Error: couldn't open file to write.\n");
+		printf("错误：无法写入文件。\n");
 		socExit();
 		free(result_buf);
 		free(socubuf);
@@ -112,7 +112,7 @@ Result Net_DownloadFile(const char *url, const char *path) {
 	curl_easy_cleanup(hnd);
 
 	if (cres != CURLE_OK) {
-		printf("Error in:\ncurl\n");
+		printf("错误：\ncurl\n");
 		socExit();
 		free(result_buf);
 		free(socubuf);
@@ -128,7 +128,7 @@ Result Net_DownloadFile(const char *url, const char *path) {
 
 	u64 endTime = osGetTime();
 	u64 totalTime = endTime - startTime;
-	printf("Download took %llu milliseconds.\n", totalTime);
+	printf("下载需要%llu毫秒。\n", totalTime);
 
 	socExit();
 	free(result_buf);

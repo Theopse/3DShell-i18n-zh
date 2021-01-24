@@ -212,7 +212,7 @@ void Dirbrowse_DisplayFiles(void) {
 			Draw_GetTextSize(0.42f, NULL, &text_height, file->name);
 
 			if (!strncmp(file->name, "..", 2))
-				Draw_Text(70, 52 + ((38 - text_height) / 2) + (38 * printed) - 4, 0.42f, config.dark_theme? WHITE : BLACK, "Parent folder");
+				Draw_Text(70, 52 + ((38 - text_height) / 2) + (38 * printed) - 4, 0.42f, config.dark_theme? WHITE : BLACK, "上级目录");
 			else {
 				Draw_Textf(70, 52 + ((38 - text_height) / 2) + (38 * printed) - 4, 0.42f, config.dark_theme? WHITE : BLACK, strlen(file->name) > 42? "%.42s..." : "%s", file->name);
 
@@ -234,7 +234,7 @@ static Result Dirbrowse_SaveLastDirectory(void) {
 	Result ret = 0;
 	
 	if (R_FAILED(ret = FS_Write(sdmc_archive, "/3ds/3DShell/lastdir.txt", cwd, strlen(cwd)))) {
-		Menu_DisplayError("Failed to save last directory:", ret);
+		Menu_DisplayError("无法保存上次的目录：", ret);
 		return ret;
 	}
 	

@@ -43,13 +43,13 @@ void Menu_DisplayFTP(void) {
 		Menu_DrawMenuBar();
 
 		if ((wifi_status != 0) && R_SUCCEEDED(ret)) {
-			Draw_Text(((320 - Draw_GetTextWidth(0.42f, "FTP initialized")) / 2), 37, 0.42f, WHITE, "FTP initialized");
-			snprintf(buf, 137, "IP: %s:5000", R_FAILED(ret)? "Failed to get IP" : hostname);
+			Draw_Text(((320 - Draw_GetTextWidth(0.42f, "FTP 已初始化")) / 2), 37, 0.42f, WHITE, "FTP 已初始化");
+			snprintf(buf, 137, "IP: %s:5000", R_FAILED(ret)? "获取 IP 失败" : hostname);
 
 			if (strlen(ftp_accepted_connection) != 0)
 				Draw_Text(((320 - Draw_GetTextWidth(0.42f, ftp_accepted_connection)) / 2), 77, 0.42f, WHITE, ftp_accepted_connection);
 
-			Draw_Text(((320 - Draw_GetTextWidth(0.42f, "File browser cannot be accessed at this time.")) / 2), 97, 0.42f, WHITE, "File browser cannot be accessed at this time.");
+			Draw_Text(((320 - Draw_GetTextWidth(0.42f, "目前无法访问文件浏览器。")) / 2), 97, 0.42f, WHITE, "目前无法访问文件浏览器。");
 
 			if (strlen(ftp_file_transfer) != 0)
 				Draw_Text(((320 - Draw_GetTextWidth(0.42f, ftp_file_transfer)) / 2), 147, 0.42f, WHITE, ftp_file_transfer);
@@ -68,12 +68,12 @@ void Menu_DisplayFTP(void) {
 			}
 		}
 		else {
-			Draw_Text(((320 - Draw_GetTextWidth(0.42f, "Failed to initialize FTP.")) / 2), 37, 0.42f, WHITE, "Failed to initialize FTP.");
-			snprintf(buf, 18, "WiFi not enabled.");
+			Draw_Text(((320 - Draw_GetTextWidth(0.42f, "初始化 FTP 失败。")) / 2), 37, 0.42f, WHITE, "初始化 FTP 失败。");
+			snprintf(buf, 18, "WiFi 未打开。");
 		}
 
 		Draw_Text(((320 - Draw_GetTextWidth(0.42f, buf)) / 2), 57, 0.42f, WHITE, buf);
-		Draw_Text(((320 - Draw_GetTextWidth(0.42f, "Tap the FTP icon to disable the FTP connection.")) / 2), 117, 0.42f, WHITE, "Tap the FTP icon to disable the FTP connection.");
+		Draw_Text(((320 - Draw_GetTextWidth(0.42f, "点击 FTP 图标来关闭 FTP 连接。")) / 2), 117, 0.42f, WHITE, "点击 FTP 图标来关闭 FTP 连接。");
 
 		Draw_EndFrame();
 

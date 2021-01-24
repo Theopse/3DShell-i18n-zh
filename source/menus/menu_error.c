@@ -17,7 +17,7 @@ void Menu_DisplayError(const char *msg, Result ret) {
 	Draw_GetTextSize(0.42f, &confirm_width, &confirm_height, "OK");
 
 	while(aptMainLoop()) {
-		Dialog_DisplayMessage("Error", msg, result, true);
+		Dialog_DisplayMessage("错误", msg, result, true);
 
 		hidScanInput();
 		u32 kDown = hidKeysDown();

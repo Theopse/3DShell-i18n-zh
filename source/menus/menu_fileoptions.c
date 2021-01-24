@@ -54,7 +54,7 @@ void FileOptions_ResetClipboard(void) {
 static Result FileOptions_CreateFolder(void) {
 	Result ret = 0;
 	char *buf = malloc(256);
-	strcpy(buf, Keyboard_GetText("New folder", "Enter name"));
+	strcpy(buf, Keyboard_GetText("新文件夹", "输入名字"));
 
 	if (strncmp(buf, "", 1) == 0) {
 		free(buf);
@@ -78,7 +78,7 @@ static Result FileOptions_CreateFolder(void) {
 static Result FileOptions_CreateFile(void) {
 	Result ret = 0;
 	char *buf = malloc(256);
-	strcpy(buf, Keyboard_GetText("New file.txt", "Enter name"));
+	strcpy(buf, Keyboard_GetText("新文件.txt", "输入名字"));
 
 	if (strncmp(buf, "", 1) == 0) {
 		free(buf);
@@ -117,7 +117,7 @@ static Result FileOptions_Rename(void) {
 	strcpy(newPath, cwd);
 	strcat(oldPath, file->name);
 
-	strcpy(buf, Keyboard_GetText(file->name, "Enter name"));
+	strcpy(buf, Keyboard_GetText(file->name, "输入名字"));
 	strcat(newPath, buf);
 	free(buf);
 
@@ -212,7 +212,7 @@ static int FileOptions_CopyFile(char *src, char *dst, bool display_animation) {
 		offset += bytes_read;
 
 		if (display_animation)
-			Dialog_DisplayProgress(copymode == 1? "Moving" : "Copying", Utils_Basename(src), offset, size);
+			Dialog_DisplayProgress(copymode == 1? "移动中" : "复制中", Utils_Basename(src), offset, size);
 	}
 	while(offset < size);
 
@@ -272,7 +272,7 @@ static Result FileOptions_CopyDir(char *src, char *dst) {
 					free(outbuffer);
 				}
 
-				Dialog_DisplayProgress(copymode == 1? "Moving" : "Copying", Utils_Basename(name), i, entryCount);
+				Dialog_DisplayProgress(copymode == 1? "移动中" : "复制中", Utils_Basename(name), i, entryCount);
 			}
 		}
 		else {
@@ -382,7 +382,7 @@ static Result FileOptions_Paste(void) {
 static void HandleDelete(void) {
 	if ((multi_select_index > 0) && (strlen(multi_select_dir) != 0)) {
 		for (int i = 0; i < multi_select_index; i++) {
-			Dialog_DisplayProgress("Delete", "Deleting multiple files...", i, multi_select_index);
+			Dialog_DisplayProgress("删除", "删除多个文件中...", i, multi_select_index);
 			
 			if (strlen(multi_select_paths[i]) != 0) {
 				if (strncmp(multi_select_paths[i], "..", 2) != 0) {
@@ -398,7 +398,7 @@ static void HandleDelete(void) {
 	}
 	else {
 		File *file = Dirbrowse_GetFileIndex(position);
-		Dialog_DisplayMessage("Delete", "Deleting...", file->name, true);
+		Dialog_DisplayMessage("删除", "删除中...", file->name, true);
 
 		if (R_FAILED(FileOptions_Delete(file)))
 			return;
@@ -450,9 +450,9 @@ void Menu_ControlDeleteDialog(u32 input) {
 }
 
 void Menu_DisplayDeleteDialog(void) {
-	Draw_GetTextSize(0.42f, &delete_confirm_width, &delete_confirm_height, "YES");
-	Draw_GetTextSize(0.42f, &delete_cancel_width, &delete_cancel_height, "NO");
-	Dialog_DisplayPrompt("Confirm deletion", "Do you wish to continue?", NULL, &delete_dialog_selection, true);
+	Draw_GetTextSize(0.42f, &delete_confirm_width, &delete_confirm_height, "是");
+	Draw_GetTextSize(0.42f, &delete_cancel_width, &delete_cancel_height, "否");
+	Dialog_DisplayPrompt("确认删除", "你想要继续吗？", NULL, &delete_dialog_selection, true);
 }
 
 void Menu_ControlProperties(u32 input) {
@@ -473,7 +473,7 @@ void Menu_DisplayProperties(void) {
 	strcpy(path + strlen(path), file->name);
 
 	Draw_Image(config.dark_theme? properties_dialog_dark : properties_dialog, 54, 30);
-	Draw_Text(61, 34, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "Properties");
+	Draw_Text(61, 34, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "属性");
 
 	char utils_size[16];
 	u64 size = 0;
@@ -483,16 +483,16 @@ void Menu_DisplayProperties(void) {
 		Utils_GetSizeString(utils_size, size);
 	}
 
-	Draw_Textf(66, 57, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Name: %.20s", file->name);
-	Draw_Textf(66, 73, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Parent: %.20s", cwd);
+	Draw_Textf(66, 57, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "名字：%.20s", file->name);
+	Draw_Textf(66, 73, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "类型：%.20s", cwd);
 
 	if (!file->isDir) {
-		Draw_Textf(66, 89, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Size: %s", utils_size);
-		Draw_Textf(66, 105, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Modified time: %s", FS_GetFileTimestamp(path));
+		Draw_Textf(66, 89, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "大小：%s", utils_size);
+		Draw_Textf(66, 105, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "修改时间：%s", FS_GetFileTimestamp(path));
 	}
 	else {
 		if (strncmp(file->name, "..", 2))
-			Draw_Textf(66, 89, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Modified time: %s", FS_GetFileTimestamp(path));
+			Draw_Textf(66, 89, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "修改时间：%s", FS_GetFileTimestamp(path));
 	}
 
 	Draw_GetTextSize(0.42f, &properties_ok_width, &properties_ok_height, "OK");
@@ -769,9 +769,9 @@ void Menu_ControlFileOptions(u32 input) {
 
 void Menu_DisplayFileOptions(void) {
 	Draw_Image(config.dark_theme? options_dialog_dark : options_dialog, 54, 30);
-	Draw_Text(61, 34, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "Actions");
+	Draw_Text(61, 34, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "操作");
 
-	Draw_GetTextSize(0.42f, &options_cancel_width, &options_cancel_height, "CANCEL");
+	Draw_GetTextSize(0.42f, &options_cancel_width, &options_cancel_height, "取消");
 	
 	if (row == 0 && column == 0)
 		Draw_Rect(56, 69, 103, 36, config.dark_theme? SELECTOR_COLOUR_DARK : SELECTOR_COLOUR_LIGHT);
@@ -792,21 +792,21 @@ void Menu_DisplayFileOptions(void) {
 		Draw_Rect((256 - options_cancel_width) - 5, (221 - options_cancel_height) - 5, options_cancel_width + 10, options_cancel_height + 10, 
 			config.dark_theme? SELECTOR_COLOUR_DARK : SELECTOR_COLOUR_LIGHT);
 
-	Draw_Text(256 - options_cancel_width, 221 - options_cancel_height - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "CANCEL");
+	Draw_Text(256 - options_cancel_width, 221 - options_cancel_height - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "取消");
 
 	if (!options_more) {
-		Draw_Text(66, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Properties");
-		Draw_Text(66, 114, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, copy_status? "Paste" : "Copy");
-		Draw_Text(66, 150, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Delete");
+		Draw_Text(66, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "属性");
+		Draw_Text(66, 114, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, copy_status? "粘贴" : "复制");
+		Draw_Text(66, 150, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "删除");
 		
-		Draw_Text(170, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Refresh");
-		Draw_Text(170, 114, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, cut_status? "Paste" : "Move");
-		Draw_Text(170, 150, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "More...");
+		Draw_Text(170, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "刷新");
+		Draw_Text(170, 114, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, cut_status? "粘贴" : "移动");
+		Draw_Text(170, 150, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "更多...");
 	}
 	else {
-		Draw_Text(66, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "New folder");
-		Draw_Text(66, 114, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Rename");
+		Draw_Text(66, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "新建文件夹");
+		Draw_Text(66, 114, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "重命名");
 
-		Draw_Text(170, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "New file");
+		Draw_Text(170, 78, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "新建文件");
 	}
 }

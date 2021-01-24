@@ -22,8 +22,8 @@ const char *Keyboard_GetText(const char *initial_text, const char *hint_text) {
 	if (strlen(initial_text) != 0)
 		swkbdSetInitialText(&swkbd, initial_text);
 
-	swkbdSetButton(&swkbd, SWKBD_BUTTON_LEFT, "Cancel", false);
-	swkbdSetButton(&swkbd, SWKBD_BUTTON_RIGHT, "Confirm", true);
+	swkbdSetButton(&swkbd, SWKBD_BUTTON_LEFT, "取消", false);
+	swkbdSetButton(&swkbd, SWKBD_BUTTON_RIGHT, "确认", true);
 
 	swkbdSetFeatures(&swkbd, SWKBD_ALLOW_HOME);
 	swkbdSetFeatures(&swkbd, SWKBD_ALLOW_RESET);

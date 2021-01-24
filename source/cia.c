@@ -80,7 +80,7 @@ Result CIA_InstallTitle(const char *path, FS_MediaType media, bool update) {
 		}
 
 		offset += bytes_read;
-		Dialog_DisplayProgress("Installing", Utils_Basename(path), offset, size);
+		Dialog_DisplayProgress("安装中", Utils_Basename(path), offset, size);
 	} while(offset < size);
 
 	if (bytes_read != bytes_written) {

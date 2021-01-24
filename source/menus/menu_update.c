@@ -110,7 +110,7 @@ static void Menu_InstallUpdate(void) {
 }
 
 void Menu_DisplayUpdate(void) {
-	float err_width = ((320 - Draw_GetTextWidth(0.42f, "No updates available.")) / 2);
+	float err_width = ((320 - Draw_GetTextWidth(0.42f, "没有新的更新。")) / 2);
 
 	Draw_Rect(0, 0, 320, 20, config.dark_theme? STATUS_BAR_DARK : MENU_BAR_LIGHT);
 	Draw_Rect(0, 20, 320, 220, config.dark_theme? BLACK_BG : WHITE);
@@ -118,58 +118,58 @@ void Menu_DisplayUpdate(void) {
 	Menu_DrawMenuBar();
 
 	Draw_Rect(0, 20, 400, 35, config.dark_theme? MENU_BAR_DARK : STATUS_BAR_LIGHT); // Menu bar
-	Draw_Text(10, 28, 0.44f, WHITE, "Update Center");
+	Draw_Text(10, 28, 0.44f, WHITE, "更新中心");
 
 	ACU_GetWifiStatus(&wifi_status);
 
 	if (wifi_status == 0)
-		Draw_Text(((320 - Draw_GetTextWidth(0.44f, "WiFi not enabled.")) / 2) + 8, 60, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "WiFi not enabled.");
+		Draw_Text(((320 - Draw_GetTextWidth(0.44f, "WIFI 未打开。")) / 2) + 8, 60, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "WIFI 未打开。");
 	else if (err)
-		Draw_Text(err_width + 8, 60, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "No updates available.");
+		Draw_Text(err_width + 8, 60, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "没有新的更新。");
 
-	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Nightly builds")))/2) + 6, 82, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Nightly builds");
-	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Untested builds that may contain bugs.")))/2) + 6, 96, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Untested builds that may contain bugs.");
+	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Nightly 版本")))/2) + 6, 82, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Nightly 版本");
+	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "未测试的版本，可能会有一些 bug。")))/2) + 6, 96, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "未测试的版本，可能会有一些 bug。");
 
-	Draw_Rect(106, 117, (Draw_GetTextWidth(0.44f, "Check for updates") + 10), 20, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
-	Draw_Rect(110 - 3, 118, (Draw_GetTextWidth(0.44f, "Check for updates") + 8), 18, config.dark_theme? BLACK_BG : WHITE);
-	Draw_Rect(110 - 2, 119, (Draw_GetTextWidth(0.44f, "Check for updates") + 6), 16, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
-	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Check for updates")))/2) + 6, 118, 0.42f, config.dark_theme? BLACK_BG : WHITE, "Check for updates");
+	Draw_Rect(106, 117, (Draw_GetTextWidth(0.44f, "检查更新") + 10), 20, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
+	Draw_Rect(110 - 3, 118, (Draw_GetTextWidth(0.44f, "检查更新") + 8), 18, config.dark_theme? BLACK_BG : WHITE);
+	Draw_Rect(110 - 2, 119, (Draw_GetTextWidth(0.44f, "检查更新") + 6), 16, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
+	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "检查更新")))/2) + 6, 118, 0.42f, config.dark_theme? BLACK_BG : WHITE, "检查更新");
 
-	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Milestone builds")))/2) + 6, 152, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Milestone builds");
-	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Official release builds.")))/2) + 6, 166, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Official release builds.");
+	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Milestone 版本")))/2) + 6, 152, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Milestone 版本");
+	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "官方发布的版本。")))/2) + 6, 166, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "官方发布的版本。");
 	
-	Draw_Rect(106, 187, (Draw_GetTextWidth(0.44f, "Check for updates") + 10), 20, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
-	Draw_Rect(110 - 3, 188, (Draw_GetTextWidth(0.44f, "Check for updates") + 8), 18, config.dark_theme? BLACK_BG : WHITE);
-	Draw_Rect(110 - 2, 189, (Draw_GetTextWidth(0.44f, "Check for updates") + 6), 16, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
-	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "Check for updates")))/2) + 6, 188, 0.42f, config.dark_theme? BLACK_BG : WHITE, "Check for updates");
+	Draw_Rect(106, 187, (Draw_GetTextWidth(0.44f, "检查更新") + 10), 20, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
+	Draw_Rect(110 - 3, 188, (Draw_GetTextWidth(0.44f, "检查更新") + 8), 18, config.dark_theme? BLACK_BG : WHITE);
+	Draw_Rect(110 - 2, 189, (Draw_GetTextWidth(0.44f, "检查更新") + 6), 16, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR);
+	Draw_Text(((320 - (Draw_GetTextWidth(0.44f, "检查更新")))/2) + 6, 188, 0.42f, config.dark_theme? BLACK_BG : WHITE, "检查更新");
 }
 
 void Menu_DisplayUpdate2(void) {
 	float text_width = 0, text2_width = 0;
 
-	Draw_GetTextSize(0.42f, &text_width, NULL, "This action cannot be undone.");
-	Draw_GetTextSize(0.42f, &text2_width, NULL, "Do you wish to update?");
-	Draw_GetTextSize(0.42f, &update_confirm_width, &update_confirm_height, "YES");
-	Draw_GetTextSize(0.42f, &update_cancel_width, &update_cancel_height, "NO");
+	Draw_GetTextSize(0.42f, &text_width, NULL, "此操作无法被撤销。");
+	Draw_GetTextSize(0.42f, &text2_width, NULL, "你希望升级吗？");
+	Draw_GetTextSize(0.42f, &update_confirm_width, &update_confirm_height, "是");
+	Draw_GetTextSize(0.42f, &update_cancel_width, &update_cancel_height, "否");
 
 	Draw_Image(config.dark_theme? dialog_dark : dialog, ((320 - (dialog.subtex->width)) / 2), ((240 - (dialog.subtex->height)) / 2));
 
 	Draw_Textf(((320 - (dialog.subtex->width)) / 2) + 6, ((240 - (dialog.subtex->height)) / 2) + 6 - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "New update: %s", version);
 
-	Draw_Text(((320 - (text_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 40 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "This action cannot be undone.");
-	Draw_Text(((320 - (text2_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 55 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "Do you wish to update?");
+	Draw_Text(((320 - (text_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 40 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "此操作无法被撤销。");
+	Draw_Text(((320 - (text2_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 55 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "你希望升级吗？");
 
 	if (update_dialog_selection == 0)
 		Draw_Rect((288 - update_cancel_width) - 5, (159 - update_cancel_height) - 5, update_cancel_width + 10, update_cancel_height + 10, config.dark_theme? SELECTOR_COLOUR_DARK : SELECTOR_COLOUR_LIGHT);
 	else if (update_dialog_selection == 1)
 		Draw_Rect((248 - (update_confirm_width)) - 5, (159 - update_confirm_height) - 5, update_confirm_width + 10, update_confirm_height + 10, config.dark_theme? SELECTOR_COLOUR_DARK : SELECTOR_COLOUR_LIGHT);
 
-	Draw_Text(248 - (update_confirm_width), (159 - update_confirm_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "YES");
-	Draw_Text(288 - update_cancel_width, (159 - update_cancel_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "NO");
+	Draw_Text(248 - (update_confirm_width), (159 - update_confirm_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "是");
+	Draw_Text(288 - update_cancel_width, (159 - update_cancel_height) - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "否");
 }
 
 void Menu_ControlUpdate(u32 input) {
-	if ((input & KEY_TOUCH) && (TouchInRect(106, 117, (106) + (Draw_GetTextWidth(0.44f, "Check for updates") + 10), 137))) {
+	if ((input & KEY_TOUCH) && (TouchInRect(106, 117, (106) + (Draw_GetTextWidth(0.44f, "检查更新") + 10), 137))) {
 		if (wifi_status != 0) {
 			Net_DownloadFile("https://github.com/joel16/3DShell/raw/gh-pages/UPDATE_NIGHTLY.txt", "/3ds/3DShell/UPDATE_NIGHTLY.txt");
 		
@@ -180,7 +180,7 @@ void Menu_ControlUpdate(u32 input) {
 		}
 	}
 
-	else if ((input & KEY_TOUCH) && (TouchInRect(106, 187, (106) + (Draw_GetTextWidth(0.44f, "Check for updates") + 10), 207))) {
+	else if ((input & KEY_TOUCH) && (TouchInRect(106, 187, (106) + (Draw_GetTextWidth(0.44f, "检查更新") + 10), 207))) {
 		if (wifi_status != 0) {
 			Net_DownloadFile("https://github.com/joel16/3DShell/raw/gh-pages/UPDATE_MILESTONE.txt", "/3ds/3DShell/UPDATE_MILESTONE.txt");
 			if (Menu_ValidateUpdate(false))

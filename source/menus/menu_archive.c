@@ -104,7 +104,7 @@ int Archive_ExtractArchive(const char *path) {
     }
 
     for (;;) {
-		Dialog_DisplayProgress("Extracting", path, count, max);
+		Dialog_DisplayProgress("解压中", path, count, max);
 
         struct archive_entry *entry = NULL;
         ret = archive_read_next_header(handle, &entry);
@@ -157,7 +157,7 @@ Result Archive_ExtractFile(const char *path) {
 	Draw_GetTextSize(0.42f, &cancel_width, &cancel_height, "NO");
 
 	while(aptMainLoop()) {
-		Dialog_DisplayPrompt("Extract file", "This may take a few minutes.", "Do you want to continue?", &dialog_selection, true);
+		Dialog_DisplayPrompt("解压文件", "这可能需要一点时间。", "你想继续吗？", &dialog_selection, true);
 
 		hidScanInput();
 		u32 kDown = hidKeysDown();
