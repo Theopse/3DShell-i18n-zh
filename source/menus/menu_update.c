@@ -148,7 +148,7 @@ void Menu_DisplayUpdate2(void) {
 	float text_width = 0, text2_width = 0;
 
 	Draw_GetTextSize(0.42f, &text_width, NULL, "此操作无法被撤销。");
-	Draw_GetTextSize(0.42f, &text2_width, NULL, "你希望升级吗？");
+	Draw_GetTextSize(0.42f, &text2_width, NULL, "你希望更新吗？");
 	Draw_GetTextSize(0.42f, &update_confirm_width, &update_confirm_height, "是");
 	Draw_GetTextSize(0.42f, &update_cancel_width, &update_cancel_height, "否");
 
@@ -157,7 +157,7 @@ void Menu_DisplayUpdate2(void) {
 	Draw_Textf(((320 - (dialog.subtex->width)) / 2) + 6, ((240 - (dialog.subtex->height)) / 2) + 6 - 3, 0.42f, config.dark_theme? TITLE_COLOUR_DARK : TITLE_COLOUR, "New update: %s", version);
 
 	Draw_Text(((320 - (text_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 40 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "此操作无法被撤销。");
-	Draw_Text(((320 - (text2_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 55 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "你希望升级吗？");
+	Draw_Text(((320 - (text2_width)) / 2), ((240 - (dialog.subtex->height)) / 2) + 55 - 4, 0.42f, config.dark_theme? TEXT_MIN_COLOUR_DARK : TEXT_MIN_COLOUR_LIGHT, "你希望更新吗？");
 
 	if (update_dialog_selection == 0)
 		Draw_Rect((288 - update_cancel_width) - 5, (159 - update_cancel_height) - 5, update_cancel_width + 10, update_cancel_height + 10, config.dark_theme? SELECTOR_COLOUR_DARK : SELECTOR_COLOUR_LIGHT);
